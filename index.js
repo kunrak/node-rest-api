@@ -7,6 +7,14 @@ const morgan = require("morgan");
 
 dotenv.config();
 
-app.listen(8800, () => {
-  console.log("Backend server is running!");
-});
+mongoose
+  .connect(process.env.MONGO_URL)
+  .then(() => {
+    console.log("Connected to MongoDB");
+    app.listen(8800, () => {
+      console.log("Server is running on port 8800!!");
+    });
+  })
+  .catch((err) => {
+    console.error("Failed to connect to MongoDB", err);
+  });
