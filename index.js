@@ -18,3 +18,11 @@ mongoose
   .catch((err) => {
     console.error("Failed to connect to MongoDB", err);
   });
+
+app.use(express.json());
+app.use(helmet());
+app.use(morgan("common"));
+
+app.get("/", (req, res) => {
+  res.send("Welcome to the Home Page!");
+});
